@@ -1,7 +1,8 @@
 import "./loginForm.css";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import {Data} from "./data";
 // import Image from '../../public/UGA-soutien-etudiants.jpg'
 import {
   MDBBtn,
@@ -11,12 +12,11 @@ import {
   MDBCardImage,
   MDBRow,
   MDBCol,
-  MDBIcon,
   MDBInput
 }
 from 'mdb-react-ui-kit';
 
-function LoginForm() {
+export function LoginForm() {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
   const history = useNavigate();
@@ -28,8 +28,9 @@ function LoginForm() {
         const response = await axios.post('http://localhost:9090/api/login', {
             Email,
             Password,
-        });
-        if (response.data === 'admins') {
+        })
+        Data.push(response.data)
+        if (Data[0].userType === 'admins') {
             history('/admins')
         } else {
             history('/users')
@@ -79,5 +80,4 @@ function LoginForm() {
     </MDBContainer>
   );
 }
-
-export default LoginForm;
+export const vstat=LoginForm.vstat;
