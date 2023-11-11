@@ -1,0 +1,10 @@
+.imagefont {
+    background-image: url('../image/Sans_titre.jpeg');
+    height: 600px;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

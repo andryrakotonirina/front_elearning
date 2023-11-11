@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {Data} from "./data";
-// import Image from '../../public/UGA-soutien-etudiants.jpg'
+import Image from '../image/img1.jpg'
 import {
   MDBBtn,
   MDBContainer,
@@ -30,6 +30,7 @@ export function LoginForm() {
             Password,
         })
         Data.push(response.data)
+        console.log(Data)
         if (Data[0].userType === 'admins') {
             history('/admins')
         } else {
@@ -46,7 +47,7 @@ export function LoginForm() {
         <MDBRow className='g-0'>
 
           <MDBCol md='6'>
-            <MDBCardImage src='../../public/UGA-soutien-etudiants.jpg' alt="login form" className='rounded-start w-100'/>
+            <MDBCardImage src={Image} alt="login form" className='rounded-start w-100 h-100'/>
           </MDBCol>
 
           <MDBCol md='6'>
