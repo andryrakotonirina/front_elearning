@@ -1,6 +1,6 @@
 import "./loginForm.css";
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {Data} from "./data";
 import Image from '../image/img1.jpg'
@@ -16,10 +16,13 @@ import {
 }
 from 'mdb-react-ui-kit';
 
+import { Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+
 export function LoginForm() {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
   const history = useNavigate();
+  const [open, setOpen] = useState(false)
 
   const handlerSubmit = async (e) => {
     e.preventDefault();
@@ -31,18 +34,31 @@ export function LoginForm() {
         })
         Data.push(response.data)
         console.log(Data)
+        
+        setOpen(true)
         if (Data[0].userType === 'admins') {
+          setTimeout(() => {
             history('/admins')
+          }, 1000);
+            
         } else {
+          setTimeout(() => {
             history('/users')
+          }, 1000);
         }
+        
+        
+        
+        
     } catch (error) {
         alert("Votre mot de passe ou votre email est incorrect")
     }
   }
   return (
     <MDBContainer className="my-5">
-
+      <Dialog  open = {open} className="bg-none">
+        <DialogTitle className="bg-success rounded-2 ">Connexion reussi</DialogTitle>
+      </Dialog>
       <MDBCard>
         <MDBRow className='g-0'>
 
@@ -60,13 +76,23 @@ export function LoginForm() {
 
               <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Se connecter sur votre compte</h5>
 
-                <MDBInput wrapperClass='mb-4' label='Adresse email' id='Email' type='email' size="lg" value={Email} onChange={(e)=> setEmail(e.target.value)}/>
+                <MDBInput 
+                wrapperClass='mb-4' 
+                label='Adresse email' 
+                id='Email' type='email' 
+                size="lg" 
+                value={Email} 
+                onChange={(e)=> setEmail(e.target.value)}/>
                 <MDBInput wrapperClass='mb-4' label='Mot de passe' id='Password' type='password' size="lg" value={Password} onChange={(e)=> setPassword(e.target.value)}/>
 
               <MDBBtn className="mb-4 px-5" color='dark' size='lg' onClick={handlerSubmit}>Se connecter</MDBBtn>
               <a className="small text-muted" href="#!">mot de passe oublié?</a>
-              <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Vous n'avez pas du compte? <a href="#!" style={{color: '#393f81'}}>Inscrivez vous ici</a></p>
-
+              <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Vous n'avez pas du compte? 
+                <a  style={{color: '#393f81'}} onClick={()=> history(`/signup`)}>
+                  Inscrivez vous ici
+                </a>
+                {/* <MDBBtn className="mb-4 px-5" color='dark' size='lg' onClick={()=> history(`/admins/${item.id}`)}>Se connecter</MDBBtn> */}
+              </p>
               <div className='d-flex flex-row justify-content-start'>
                 <a href="#!" className="small text-muted me-1">Terms of use.</a>
                 <a href="#!" className="small text-muted">Privacy policy</a>

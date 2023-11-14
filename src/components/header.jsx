@@ -57,7 +57,7 @@ export default function App() {
                 target="_blank"
               >
                 <Link to='login' className="zaza m-2">
-                S'inscrire
+                Se connecter
                 </Link>
               </MDBBtn>
 
@@ -69,7 +69,7 @@ export default function App() {
                 target="_blank"
               >
                 <Link to='signup' className="zaza m-2">
-                Se connecter
+                S'inscrire
                 </Link>
               </MDBBtn>
 

@@ -1,41 +1,35 @@
+import { MDBBtn } from 'mdb-react-ui-kit';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Card from './card';
 import Footer from './footer';
 import SuggestionCours from './suggestionCours';
 export default function SideBar() {
-    
+    const navigate = useNavigate();
   return (
+    
     <>
     <nav class="navbar navbar-expand-lg navbar-light bg-info">
     {/* <!-- Container wrapper --> */}
         <div class="container-fluid bg-info">
-            {/* <button
-            class="navbar-toggler"
-            type="button"
-            data-mdb-toggle="collapse"
-            data-mdb-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-            >
-            E-Learning
-            </button> */}
-
-            {/* <!-- Collapsible wrapper --> */}
+            
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             {/* <!-- Navbar brand --> */}
             <span class="navbar-brand mb-0 h1"><i class="fas fa-brain"></i>E-Learning</span>
             {/* <!-- Left links --> */}
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                <a class="nav-link" href="#">Cours</a>
+                <a class="nav-link color-black" onClick={()=> navigate()}>Cours</a>
+                </li>
+                <li class="">
+                    {/* <MDBBtn className='p-10' onClick={()=> navigate(`/InsertChapitre`)}>Chapitres</MDBBtn> */}
+                    <a class="nav-link" onClick={()=> navigate(`/homeChapitre`)}>Chapitres</a>
                 </li>
                 <li class="nav-item bg-info">
-                <a class="nav-link" href="#">Ventes</a>
+                    <a class="nav-link" onClick={()=> navigate()}>Matieres</a>
                 </li>
                 <li class="nav-item bg-info">
-                <a class="nav-link" href="#">Projects</a>
+                <a class="nav-link" onClick={()=> navigate()}>Utilisateurs</a>
                 </li>
             </ul>
             {/* <!-- Left links --> */}
@@ -114,7 +108,8 @@ export default function SideBar() {
                 <i class="fas fa-search"></i>
             </span>
         </form>
-        <a class="navbar-brand"><Link to='insertCours'>Ajouter un cours</Link> </a>
+        
+        <a class="navbar-brand "><MDBBtn className='btn btn-primary' onClick={() => navigate(`/insertCours`)}>Ajouter un cours</MDBBtn> </a>
     </div>
     </nav>
     
